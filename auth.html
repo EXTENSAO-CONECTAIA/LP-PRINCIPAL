@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direito Hub - Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .auth-container {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    /* Logo / Brand */
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, .3);
+    }
+
+    .brand-logo span {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .brand p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    /* Card */
+    .auth-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .08);
+      overflow: hidden;
+    }
+
+    /* Tabs */
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color .2s;
+    }
+
+    .auth-tab:hover {
+      color: #4f46e5;
+    }
+
+    .auth-tab.active {
+      color: #4f46e5;
+    }
+
+    .auth-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* Form */
+    .auth-form {
+      padding: 28px;
+    }
+
+    .auth-form.hidden {
+      display: none;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1f2937;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, .12);
+    }
+
+    .form-group input::placeholder {
+      color: #9ca3af;
+    }
+
+    .form-group .input-hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    /* Buttons */
+    .btn-submit {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, .3);
+      transition: transform .15s, box-shadow .15s, opacity .2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, .4);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: #4f46e5;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .btn-link:hover {
+      color: #3730a3;
+    }
+
+    /* Messages */
+    .msg {
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .msg.visible { display: block; }
+    .msg.success { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
+    .msg.error { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+    .msg.info { background: #eef2ff; border: 1px solid #c7d2fe; color: #3730a3; }
+    .msg.warning { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+
+    /* Forgot password */
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 18px;
+      margin-top: -10px;
+    }
+
+    /* Footer */
+    .auth-footer {
+      padding: 16px 28px;
+      border-top: 1px solid #e5e7eb;
+      background: #f9fafb;
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Forgot password form (overlay) */
+    .forgot-overlay {
+      display: none;
+      padding: 28px;
+    }
+
+    .forgot-overlay.visible {
+      display: block;
+    }
+
+    .forgot-overlay h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .forgot-overlay p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 0;
+      margin-top: 12px;
+    }
+
+    .back-btn:hover {
+      color: #4f46e5;
+    }
+
+    /* Email confirmation panel */
+    .confirm-panel {
+      display: none;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .confirm-panel.visible {
+      display: block;
+    }
+
+    .confirm-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px;
+    }
+
+    .confirm-panel h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .confirm-panel p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .confirm-email {
+      display: inline-block;
+      background: #f3f4f6;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 8px 0 20px;
+      word-break: break-all;
+    }
+
+    .btn-resend {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79,70,229,.3);
+      transition: transform .15s;
+    }
+
+    .btn-resend:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-resend:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .confirm-tips {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-logo"><span>DH</span></div>
+      <h1>Direito Hub</h1>
+      <p>Seus processos, direto para a IA</p>
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+      <!-- Tabs -->
+      <div class="auth-tabs" id="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Entrar</button>
+        <button class="auth-tab" data-tab="signup">Criar conta</button>
+      </div>
+
+      <!-- ================================ -->
+      <!-- LOGIN FORM -->
+      <!-- ================================ -->
+      <div class="auth-form" id="form-login">
+        <div class="msg" id="msg-login"></div>
+
+        <div class="form-group">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Senha</label>
+          <input type="password" id="login-password" placeholder="Sua senha" autocomplete="current-password">
+        </div>
+
+        <div class="forgot-row">
+          <button class="btn-link" id="btn-forgot">Esqueci minha senha</button>
+        </div>
+
+        <button class="btn-submit" id="btn-login">Entrar</button>
+      </div>
+
+      <!-- ================================ -->
+      <!-- SIGNUP FORM -->
+      <!-- ================================ -->
+      <div class="auth-form hidden" id="form-signup">
+        <div class="msg" id="msg-signup"></div>
+
+        <div class="form-group">
+          <label for="signup-name">Nome completo</label>
+          <input type="text" id="signup-name" placeholder="Seu nome" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="signup-email">E-mail</label>
+          <input type="email" id="signup-email" placeholder="seu@email.com" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="signup-password">Senha</label>
+          <input type="password" id="signup-password" placeholder="Minimo 6 caracteres" autocomplete="new-password">
+          <div class="input-hint">Use pelo menos 6 caracteres</div>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-password2">Confirmar senha</label>
+          <input type="password" id="signup-password2" placeholder="Repita a senha" autocomplete="new-password">
+        </div>
+
+        <button class="btn-submit" id="btn-signup">Criar conta</button>
+      </div>
+
+      <!-- ================================ -->
+      <!-- FORGOT PASSWORD -->
+      <!-- ================================ -->
+      <div class="forgot-overlay" id="forgot-panel">
+        <h3>Recuperar senha</h3>
+        <p>Informe seu e-mail e enviaremos um link para redefinir sua senha.</p>
+
+        <div class="msg" id="msg-forgot"></div>
+
+        <div class="form-group">
+          <label for="forgot-email">E-mail</label>
+          <input type="email" id="forgot-email" placeholder="seu@email.com" autocomplete="email">
+        </div>
+
+        <button class="btn-submit" id="btn-forgot-submit">Enviar link de recuperacao</button>
+        <button class="back-btn" id="btn-forgot-back">&larr; Voltar para o login</button>
+      </div>
+
+      <!-- ================================ -->
+      <!-- EMAIL CONFIRMATION -->
+      <!-- ================================ -->
+      <div class="confirm-panel" id="confirm-panel">
+        <div class="confirm-icon">📧</div>
+        <h3>Confirme seu e-mail</h3>
+        <p>Enviamos um link de confirmacao para:</p>
+        <div class="confirm-email" id="confirm-email">email@exemplo.com</div>
+        <p>Verifique sua caixa de entrada e clique no link que enviamos para ativar sua conta.</p>
+
+        <div class="msg" id="msg-confirm"></div>
+
+        <button class="btn-resend" id="btn-resend">
+          <span>📨</span> Reenviar e-mail
+        </button>
+
+        <button class="back-btn" id="btn-confirm-back">&larr; Voltar para o login</button>
+
+        <div class="confirm-tips">
+          Nao encontrou? Verifique a pasta de <strong>spam</strong> ou <strong>lixo eletronico</strong>.<br>
+          O link expira em 24 horas.
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="auth-footer">
+        Direito Hub &copy; 2025 — Extensao Chrome para advogados
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- Config e Auth -->
+  <script src="supabase/supabase-config.js"></script>
+  <script src="supabase/supabase-auth.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ========================================
+    // ELEMENTOS
+    // ========================================
+    var tabs = document.querySelectorAll('.auth-tab');
+    var formLogin = document.getElementById('form-login');
+    var formSignup = document.getElementById('form-signup');
+    var forgotPanel = document.getElementById('forgot-panel');
+    var confirmPanel = document.getElementById('confirm-panel');
+    var authTabs = document.getElementById('auth-tabs');
+
+    var msgLogin = document.getElementById('msg-login');
+    var msgSignup = document.getElementById('msg-signup');
+    var msgForgot = document.getElementById('msg-forgot');
+    var msgConfirm = document.getElementById('msg-confirm');
+
+    var btnLogin = document.getElementById('btn-login');
+    var btnSignup = document.getElementById('btn-signup');
+    var btnForgot = document.getElementById('btn-forgot');
+    var btnForgotSubmit = document.getElementById('btn-forgot-submit');
+    var btnForgotBack = document.getElementById('btn-forgot-back');
+    var btnResend = document.getElementById('btn-resend');
+    var btnConfirmBack = document.getElementById('btn-confirm-back');
+
+    var confirmEmailEl = document.getElementById('confirm-email');
+    var pendingEmail = '';
+
+    // ========================================
+    // HELPERS
+    // ========================================
+    function showMsg(el, text, type) {
+      el.textContent = text;
+      el.className = 'msg visible ' + type;
+    }
+
+    function hideMsg(el) {
+      el.className = 'msg';
+    }
+
+    function setLoading(btn, loading, originalText) {
+      if (loading) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Aguarde...';
+      } else {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    }
+
+    function showPanel(panel) {
+      formLogin.classList.add('hidden');
+      formSignup.classList.add('hidden');
+      forgotPanel.classList.remove('visible');
+      confirmPanel.classList.remove('visible');
+
+      if (panel === 'login') {
+        formLogin.classList.remove('hidden');
+        authTabs.style.display = 'flex';
+        setActiveTab('login');
+      } else if (panel === 'signup') {
+        formSignup.classList.remove('hidden');
+        authTabs.style.display = 'flex';
+        setActiveTab('signup');
+      } else if (panel === 'forgot') {
+        formLogin.classList.add('hidden');
+        formSignup.classList.add('hidden');
+        authTabs.style.display = 'none';
+        forgotPanel.classList.add('visible');
+      } else if (panel === 'confirm') {
+        formLogin.classList.add('hidden');
+        formSignup.classList.add('hidden');
+        authTabs.style.display = 'none';
+        confirmPanel.classList.add('visible');
+      }
+    }
+
+    function setActiveTab(tabName) {
+      tabs.forEach(function(t) {
+        t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
+      });
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // ========================================
+    // TABS
+    // ========================================
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = this.getAttribute('data-tab');
+        showPanel(target);
+        hideMsg(msgLogin);
+        hideMsg(msgSignup);
+      });
+    });
+
+    // ========================================
+    // LOGIN
+    // ========================================
+    btnLogin.addEventListener('click', async function() {
+      hideMsg(msgLogin);
+
+      var email = document.getElementById('login-email').value.trim();
+      var password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showMsg(msgLogin, 'Preencha todos os campos.', 'error');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showMsg(msgLogin, 'E-mail invalido.', 'error');
+        return;
+      }
+
+      setLoading(btnLogin, true, 'Entrar');
+
+      try {
+        var result = await window.DH_Auth.signIn(email, password);
+
+        if (result.needsConfirmation) {
+          pendingEmail = email;
+          confirmEmailEl.textContent = email;
+          showPanel('confirm');
+          setLoading(btnLogin, false, 'Entrar');
+          return;
+        }
+
+        if (!result.success) {
+          showMsg(msgLogin, result.error || 'Erro ao fazer login.', 'error');
+          setLoading(btnLogin, false, 'Entrar');
+          return;
+        }
+
+        // Login OK!
+        showMsg(msgLogin, 'Login realizado com sucesso! Redirecionando...', 'success');
+        setLoading(btnLogin, false, 'Entrar');
+
+        // Salvar indicacao de logado no storage da extensao
+        chrome.storage.local.set({ dh_logged_in: true, dh_user_email: email });
+
+        // Fechar aba apos 1.5s
+        setTimeout(function() {
+          window.close();
+        }, 1500);
+
+      } catch (err) {
+        showMsg(msgLogin, 'Erro inesperado: ' + err.message, 'error');
+        setLoading(btnLogin, false, 'Entrar');
+      }
+    });
+
+    // Enter key no login
+    document.getElementById('login-password').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') btnLogin.click();
+    });
+
+    // ========================================
+    // CADASTRO (Sign Up)
+    // ========================================
+    btnSignup.addEventListener('click', async function() {
+      hideMsg(msgSignup);
+
+      var name = document.getElementById('signup-name').value.trim();
+      var email = document.getElementById('signup-email').value.trim();
+      var password = document.getElementById('signup-password').value;
+      var password2 = document.getElementById('signup-password2').value;
+
+      if (!name || !email || !password || !password2) {
+        showMsg(msgSignup, 'Preencha todos os campos.', 'error');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showMsg(msgSignup, 'E-mail invalido.', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showMsg(msgSignup, 'A senha deve ter pelo menos 6 caracteres.', 'error');
+        return;
+      }
+
+      if (password !== password2) {
+        showMsg(msgSignup, 'As senhas nao conferem.', 'error');
+        return;
+      }
+
+      setLoading(btnSignup, true, 'Criar conta');
+
+      try {
+        var result = await window.DH_Auth.signUp(email, password, { nome: name });
+
+        if (!result.success) {
+          showMsg(msgSignup, result.error || 'Erro ao criar conta.', 'error');
+          setLoading(btnSignup, false, 'Criar conta');
+          return;
+        }
+
+        // Cadastro OK - precisa confirmar email
+        pendingEmail = email;
+        confirmEmailEl.textContent = email;
+        showPanel('confirm');
+        setLoading(btnSignup, false, 'Criar conta');
+
+      } catch (err) {
+        showMsg(msgSignup, 'Erro inesperado: ' + err.message, 'error');
+        setLoading(btnSignup, false, 'Criar conta');
+      }
+    });
+
+    // Enter key no signup
+    document.getElementById('signup-password2').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') btnSignup.click();
+    });
+
+    // ========================================
+    // ESQUECI MINHA SENHA
+    // ========================================
+    btnForgot.addEventListener('click', function() {
+      hideMsg(msgForgot);
+      var loginEmail = document.getElementById('login-email').value.trim();
+      if (loginEmail) document.getElementById('forgot-email').value = loginEmail;
+      showPanel('forgot');
+    });
+
+    btnForgotBack.addEventListener('click', function() {
+      showPanel('login');
+    });
+
+    btnForgotSubmit.addEventListener('click', async function() {
+      hideMsg(msgForgot);
+
+      var email = document.getElementById('forgot-email').value.trim();
+      if (!email) {
+        showMsg(msgForgot, 'Informe seu e-mail.', 'error');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showMsg(msgForgot, 'E-mail invalido.', 'error');
+        return;
+      }
+
+      setLoading(btnForgotSubmit, true, 'Enviar link de recuperacao');
+
+      try {
+        var result = await window.DH_Auth.resetPassword(email);
+
+        if (!result.success) {
+          showMsg(msgForgot, result.error || 'Erro ao enviar e-mail.', 'error');
+        } else {
+          showMsg(msgForgot, 'Link de recuperacao enviado! Verifique seu e-mail.', 'success');
+        }
+      } catch (err) {
+        showMsg(msgForgot, 'Erro inesperado: ' + err.message, 'error');
+      }
+
+      setLoading(btnForgotSubmit, false, 'Enviar link de recuperacao');
+    });
+
+    // ========================================
+    // REENVIAR CONFIRMACAO
+    // ========================================
+    btnResend.addEventListener('click', async function() {
+      hideMsg(msgConfirm);
+
+      if (!pendingEmail) {
+        showMsg(msgConfirm, 'E-mail nao identificado.', 'error');
+        return;
+      }
+
+      btnResend.disabled = true;
+      btnResend.innerHTML = '<span>⏳</span> Enviando...';
+
+      try {
+        var result = await window.DH_Auth.resendConfirmation(pendingEmail);
+
+        if (!result.success) {
+          showMsg(msgConfirm, result.error || 'Erro ao reenviar.', 'error');
+        } else {
+          showMsg(msgConfirm, 'E-mail reenviado com sucesso!', 'success');
+        }
+      } catch (err) {
+        showMsg(msgConfirm, 'Erro: ' + err.message, 'error');
+      }
+
+      btnResend.disabled = false;
+      btnResend.innerHTML = '<span>📨</span> Reenviar e-mail';
+    });
+
+    btnConfirmBack.addEventListener('click', function() {
+      showPanel('login');
+    });
+
+    // ========================================
+    // VERIFICAR SE JA ESTA LOGADO
+    // ========================================
+    (async function checkExistingSession() {
+      try {
+        if (window.DH_Auth) {
+          var auth = await window.DH_Auth.checkAuth();
+          if (auth.loggedIn && auth.confirmed) {
+            showMsg(msgLogin, 'Voce ja esta logado como ' + auth.user.email + '. Pode fechar esta aba.', 'info');
+          }
+        }
+      } catch (e) {
+        // silently ignore
+      }
+    })();
+
+  })();
+  </script>
+
+</body>
+</html>
