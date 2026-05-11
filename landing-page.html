@@ -774,6 +774,34 @@
     @media (max-width: 480px) {
       .systems-grid { grid-template-columns: 1fr; }
     }
+
+    /* Video demonstrativo da extensão */
+    .demo-video-wrapper {
+      max-width: 960px;
+      margin: 0 auto 4rem auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.25),
+                  0 8px 20px -8px rgba(0, 0, 0, 0.12);
+      background: #000;
+      position: relative;
+    }
+    .demo-video-wrapper video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .demo-video-caption {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--gray-500, #6b7280);
+      margin-top: -2.5rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 640px) {
+      .demo-video-wrapper { margin-bottom: 2.5rem; border-radius: 12px; }
+      .demo-video-caption { margin-top: -1.5rem; margin-bottom: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -983,6 +1011,20 @@
           Desenvolvida por quem vive o dia a dia forense, cada funcionalidade resolve um problema real.
         </p>
       </div>
+
+      <!-- Vídeo demonstrativo da extensão -->
+      <div class="demo-video-wrapper">
+        <video
+          src="videos/demo-conectaia.mp4"
+          controls
+          playsinline
+          preload="metadata"
+          poster=""
+          aria-label="Vídeo demonstrativo da extensão ConectaIA">
+          Seu navegador não suporta a tag de vídeo.
+        </video>
+      </div>
+      <p class="demo-video-caption">▶ Veja a ConectaIA em ação</p>
 
       <div class="features-grid">
         <div class="feature-card">
